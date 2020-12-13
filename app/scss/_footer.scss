@@ -1,0 +1,176 @@
+.footer {
+  background: $veryDarkBlue;
+  color: $white;
+  text-align: center;
+  padding-top: 2.5rem;
+
+  @include breakpoint-up(large) {
+    padding-top: 3.125rem;
+    padding-bottom: 3.125rem;
+  }
+
+
+  a {
+    color: $white;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-areas:
+      "form form"
+      "links1 links2"
+      "links1 links2"
+      "social social"
+      "logo logo"
+      "copyright copyright";
+    align-items: center;
+    grid-row-gap: 1.25rem;
+
+    @include breakpoint-up(large) {
+      grid-template-columns: 1.5fr 1fr 1fr 2fr;
+      grid-template-rows: 1fr auto;
+      grid-template-areas:
+      "logo links1 links2 form"
+      "social links1 links2 copyright";
+      justify-items: start;
+      align-items: start;
+      gap: 0;
+    }
+  }
+
+  &__form {
+    display: flex;
+    position: relative;
+    margin-bottom: 1.25rem;
+    grid-area: form;
+    justify-content: center;
+
+    @include breakpoint-up(large) {
+      justify-self: end;
+    }
+  }
+
+  &__not-valid-message {
+    display: none;
+    position: absolute;
+  }
+ 
+  &__email {
+    font-size: 0.8rem;
+    padding: 0.8rem 1rem;
+    margin-right: 0.8rem;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    width: 100%;
+    max-width: 18.75rem;
+
+    @include breakpoint-up(large) {
+      width: 12.5rem;
+    }
+
+  }
+
+  &__button {
+    box-shadow: none;
+    padding: 0.9375rem 1.875rem;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    align-self: start;
+
+    @include breakpoint-down(medium) {
+      justify-self: center;
+    }
+
+    a {
+      line-height: 2.25;
+      transition: color 150ms ease-in-out;
+
+      &:hover {
+        color: $brightRed;
+      }
+    }
+
+    &.col1 {
+      grid-area: links1;
+    }
+
+    &.col2 {
+      grid-area: links2;
+    }
+  }
+
+  &__social {
+    // margin-bottom: 2.5rem;
+    grid-area: social;
+
+    a {
+      display: inline-block;
+
+      &:not(:last-child) {
+        margin-right: 1.875rem;
+        @include breakpoint-up(large){
+          margin-right: 0.625rem;
+        }
+      }
+
+      svg path {
+        transition: fill 150ms ease-in-out;
+      }
+
+      &:hover svg path {
+        fill: $brightRed;
+
+      }
+
+      @include breakpoint-down(medium){
+        img {
+          height: 2.1875rem;
+        }
+      }
+    }
+  }
+
+  &__logo {
+    display: inline-block;
+    // margin-bottom: 3.125rem;
+    grid-area: logo;
+
+    img {
+      width: 10rem;
+    }
+  }
+
+  &__copyright {
+    color: $darkGrayishBlue;
+    grid-area: copyright;
+    @include breakpoint-up(large) {
+      justify-self: end;
+    }
+  }
+}
+
+//data-
+[data-form-not-valid="true"] {
+
+  .footer__email {
+    color: red;
+    box-shadow: 0 0 0 2px red;
+  }
+
+  .footer__not-valid-message{
+    display: block;
+    color: red;
+    font-size: 0.8rem;
+    font-style: italic;
+    left: 1rem;
+    top: 3.3rem;
+    font-weight: 400;
+  }
+}
